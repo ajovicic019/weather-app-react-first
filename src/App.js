@@ -1,22 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import axios from "axios";
+import { Audio } from "react-loader-spinner";
 
-function App() {
+function App(props) {
+  let apiKey = `1dbf926d3b4417bf379db7043bec1047`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+  function displayTemperature(response) {
+    alert(
+      `weather in ${response.data.name} is ${Math.round(
+        response.data.main.temp
+      )}°C`
+    );
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Hello world</h1>
+        <Audio
+          height="80"
+          width="80"
+          radius="9"
+          color="red"
+          ariaLabel="loading"
+          wrapperStyle
+          wrapperClass
+        />
       </header>
     </div>
   );
